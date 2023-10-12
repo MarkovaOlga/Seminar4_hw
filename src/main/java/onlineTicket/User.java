@@ -2,7 +2,9 @@ package onlineTicket;
 
 import java.util.Date;
 
-// Класс, представляющий пользователя системы.
+/**
+Класс, представляющий пользователя системы.
+**/
 class User implements UserActions {
     @Override
     public boolean authorize(String username, String password) {
@@ -48,7 +50,7 @@ class User implements UserActions {
      * В противном случае, если хотя бы одно из предусловий не выполняется, бронирование не будет произведено, и метод вернет false.
      */
     public boolean reserveTicket() {
-// Проверка предусловий
+    // Проверка предусловий
         if (!isAuthorized()) {
             return false; // Пользователь не авторизован
         }
@@ -65,42 +67,77 @@ class User implements UserActions {
             return false; // Недостаточно средств
         }
 
-// Реализация бронирования билета
+        // Реализация бронирования билета
         if (performReservation()) {
-// Постусловие: Билет успешно забронирован
+        // Постусловие: Билет успешно забронирован
             return true;
         } else {
             return false; // Ошибка при бронировании
         }
     }
 
+    /**
+     * Метод для проверки, выбран ли маршрут
+     * @return метод возвращает true в случае, если маршрут выбран, иначе false
+     */
     private boolean isRouteSelected() {
         return false;
     }
 
+    /**
+     * Метод списывает средства со счета пользователя для покупки билета
+     * @pre пользователь должен подтвердить списание средств
+     * @post уменьшение баланса пользователя
+     * @return метод возвращает true в случае, если средства списаны, иначе false
+     */
     public boolean deductFunds () {
-// Реализация метода
+    // Реализация метода
         return false;
     }
 
+    /**
+     * Метод для подтверждения согласия пользователя на покупку
+     * @pre билет должен быть в наличии
+     * @return метод возвращает true в случае, если пользователь согласен, иначе false
+     */
+
         public boolean confirmPurchase () {
-// Реализация метода
+    // Реализация метода
             return false;
         }
 
-        public void updateTicketAvailability () {
-// Реализация метода
+    /**
+     * Метод для обновления информации по билету после покупки.
+     * Уменьшает количество доступных для продажи билетов после успешной покупки
+     */
+    public void updateTicketAvailability () {
+    // Реализация метода
         }
 
-        public boolean cancelReservation () {
-// Реализация метода
-            return false;
-        }
+    /**
+     * Метод для отмены бронирования
+     * @pre должна быть начата процедура бронирования билета
+     * @return метод возвращает true в случае, если билет больше на забронирован, иначе false
+     */
+    public boolean cancelReservation () {
+    // Реализация метода
+        return false;
+    }
 
-        private boolean performReservation () {
-            return false;
-        }
+    /**
+     * Метод для подтверждения бронирования
+     * @pre должна быть начата процедура бронирования билета
+     * @post билет успешно забронирован
+     * @return метод возвращает true в случае, если билет забронирован, иначе false
+     */
+    private boolean performReservation () {
+        return false;
+    }
 
+    /**
+     * Метод для проверки, авторизирован ли пользователь
+     * @return метод возвращает true в случае, если пользователь авторизирован, иначе false
+     */
         private boolean isAuthorized () {
             return false;
         }

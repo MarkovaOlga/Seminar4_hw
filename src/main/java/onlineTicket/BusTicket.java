@@ -1,34 +1,37 @@
 package onlineTicket;
 
+/**
+ * Класс билета на автобус
+ */
 class BusTicket extends Ticket {
     int number;
 
     @Override
     public boolean reserveTicket() {
-// Реализация метода
+    // Реализация метода
         return false;
     }
 
     @Override
     public boolean deductFunds() {
-// Реализация метода
+    // Реализация метода
         return false;
     }
 
     @Override
     public boolean confirmPurchase() {
-// Реализация метода
+    // Реализация метода
         return false;
     }
 
     @Override
     public void updateTicketAvailability() {
-// Реализация метода
+    // Реализация метода
     }
 
     @Override
     public boolean cancelReservation() {
-// Реализация метода
+    // Реализация метода
         return false;
     }
 }

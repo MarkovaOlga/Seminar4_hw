@@ -15,8 +15,31 @@ import java.util.Date;
  * - 1.1.0: Добавлена поддержка новой функциональности.
  */
 interface UserActions {
+    /**
+     * Метод используется для авторизации пользователя
+     * @param username имя пользователя
+     * @param password пароль пользователя
+     * @return метод возвращает true в случае, если авторизация прошла успешно, иначе false
+     */
     boolean authorize(String username, String password);
+
+    /**
+     * Метод для выбора мершрута
+     * @param routeId Id маршрута
+     * @param time время отправления по маршруту
+     * @return метод возвращает true в случае, если маршрут выбран успешно, иначе false
+     */
     boolean selectRoute(String routeId, Date time);
+
+    /**
+     * Метод для проверки, есть ли в наличии билеты
+     * @return метод возвращает true в случае, если билет в наличии есть, иначе false
+     */
     boolean checkTicketAvailability();
+
+    /**
+     * Метод для поверки, достаточно ли у пользователя средств на покупку билета
+     * @return метод возвращает true в случае, если средств достаточно, иначе false
+     */
     boolean checkFunds();
 }
