@@ -1,0 +1,87 @@
+@startuml
+' Интерфейсы
+interface UserActions {
++authorize(username: String, password: String): boolean
++selectRoute(routeId: String, time: DateTime): boolean
++checkTicketAvailability(): boolean
++checkFunds(): boolean
+}
+
+interface TicketActions {
++reserveTicket(): boolean
++deductFunds(): boolean
++confirmPurchase(): boolean
++updateTicketAvailability(): void
++cancelReservation(): boolean
+}
+' Классы и операции
+' класс, представляющий пользователя системы.
+
+
+class User implements UserActions{
+'предусловие -->
++authorize(username: String, password: String): boolean
++selectRoute(routeId: String, time: DateTime): boolean
++checkTicketAvailability(): boolean
++checkFunds(): boolean
+'<-- предусловие
+' постусловия -->
++reserveTicket(): boolean
++deductFunds(): boolean
++confirmPurchase(): boolean
++updateTicketAvailability(): void
++cancelReservation(): boolean
+'<-- постусловия
+}
+
+' Абстрактный класс и наследование
+abstract class Ticket implements TicketActions{
++routeId: String
++departureTime: DateTime
++price: Money
+}
+'user является наследником или реализацией класс ticket
+'что может быть интерпритировано: пользователь является типом ticket
+User --|> BusTicket : uses
+
+'busticket наследуется от ticket
+class BusTicket extends Ticket{
++number: int
++routeId: String
++departureTime: DateTime
++price: Money
+}
+
+' Предусловия
+
+User --> User : authorize(username, password)
+User --> User : selectRoute(routeId, time)
+User --> User : checkTicketAvailability()
+User --> User : checkFunds()
+
+User --> BusTicket : reserveTicket()
+
+' Постусловия
+
+User --> User : deductFunds()
+User --> User : confirmPurchase()
+User --> BusTicket : updateTicketAvailability()
+
+User --> User : cancelReservation()
+
+
+
+'Инварианты
+'это условия,которые должны быть истинными на протяжении выполнения операции
+'или в каком-то состоянии системы.
+'В вашей диаграмме есть два инварианта:
+User --> User : [invariant] Funds >= busTicket.price
+'Он гарантирует, что сумма средств на счете пользователя (Funds) не может быть отрицательной.
+'Это важно, чтобы предотвратить отрицательный баланс на счете пользователя.
+BusTicket --> BusTicket : [invariant] Price > 0
+'это инвариант для объекта BusTicket.
+'Он гарантирует, что цена билета (Price) всегда больше нуля.
+'Это важно, чтобы предотвратить создание билетов с неправильной ценой.
+Ticket --> Ticket : [invariant]Price > 0
+
+@enduml
